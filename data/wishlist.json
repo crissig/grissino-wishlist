@@ -88,6 +88,22 @@
       "nota": "Ancora da scegliere il modello: aggiungo il link appena lo trovo."
     },
     {
+      "categoria": "Ciabatte",
+      "nome": "Simil Birkenstock",
+      "descrizione": "Chiuse davanti in pelle.",
+      "opzioni": [
+        {
+          "nome": "Taglia",
+          "valore": "48/49(?)-30cm"
+        },
+        {
+          "nome": "Colore",
+          "valore": "Nero/Marrone"
+        }
+      ],
+      "nota": "No Birkenstock, inutilmente care."
+    },
+    {
       "categoria": "Caricatore serio",
       "nome": "Anker 100W USB C Charger",
       "descrizione": "Mi sono stufato di avere caricatori stupidiii. Ne voglio uno serio all'occorrenza",
