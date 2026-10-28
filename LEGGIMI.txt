@@ -1,0 +1,23 @@
+# Grissino — file pronti da pubblicare
+
+## Cosa c'è
+- `index.html`: la pagina pubblica, con la grafica originale.
+- `data/wishlist.json`: testi e dati dei regali.
+- `admin/`: pannello editoriale Decap CMS.
+
+## Caricamento su GitHub
+1. Apri https://github.com/crissig/grissino-wishlist
+2. Se ci sono file di prova, non cancellarli senza controllare. Carica i file e le cartelle di questo pacchetto usando **Add file → Upload files**.
+3. Carica il CONTENUTO della cartella `grissino-site` (non la cartella compressa `.zip`): `index.html`, `data/`, `admin/`, `images/`.
+4. Premi **Commit changes** e usa il branch `main`.
+
+## Pubblicazione e pannello
+Per avere anche il pannello `/admin/` che salva i cambiamenti, questo pacchetto è predisposto per Netlify + Decap CMS con Git Gateway. Dopo aver caricato i file:
+1. Crea/accedi a un account su https://app.netlify.com/
+2. Aggiungi un nuovo sito importando il repository GitHub `crissig/grissino-wishlist` e imposta il branch `main`; non serve un comando di build né una cartella di output.
+3. Nel pannello Netlify del sito, abilita Identity (se disponibile nel tuo account), imposta la registrazione su **Invite only**, invita la tua email e abilita **Git Gateway**.
+4. Apri il sito pubblicato e visita `/admin/` per entrare nel pannello.
+
+**Importante:** non condividere con nessuno password, token o segreti. Il sito pubblico è visibile a tutti; solo gli utenti invitati devono poter entrare nel pannello.
+
+Se nel tuo account Netlify non compare Identity/Git Gateway, fermati: non attivare registrazione aperta e non pubblicare credenziali. Il pannello richiede un backend di autenticazione configurato; caricare solo l'HTML non basta.

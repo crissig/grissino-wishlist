@@ -1,0 +1,53 @@
+backend:
+  name: git-gateway
+  branch: main
+
+site_url: /
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: "it"
+
+collections:
+  - name: "contenuti"
+    label: "Wishlist"
+    files:
+      - name: "wishlist"
+        label: "Testi e regali"
+        file: "data/wishlist.json"
+        format: "json"
+        fields:
+          - { label: "Titolo sopra", name: "occasione", widget: "string", required: false }
+          - { label: "Titolo principale", name: "titolo", widget: "string" }
+          - { label: "Sottotitolo", name: "occasione2", widget: "string", required: false }
+          - { label: "Introduzione", name: "intro", widget: "text", required: false }
+          - label: "Regali"
+            name: "regali"
+            widget: "list"
+            summary: "{{fields.nome}}"
+            fields:
+              - { label: "Categoria", name: "categoria", widget: "string", required: false }
+              - { label: "Nome del regalo", name: "nome", widget: "string" }
+              - { label: "Descrizione", name: "descrizione", widget: "text", required: false }
+              - { label: "Prezzo indicativo", name: "prezzo", widget: "string", required: false }
+              - label: "Foto (URL immagini)"
+                name: "foto"
+                widget: "list"
+                required: false
+                field: { label: "Indirizzo foto", name: "foto", widget: "string" }
+              - label: "Opzioni (taglia, colore, versione...)"
+                name: "opzioni"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Nome opzione", name: "nome", widget: "string" }
+                  - { label: "Valore", name: "valore", widget: "string" }
+              - label: "Negozi"
+                name: "negozi"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Nome negozio", name: "nome", widget: "string" }
+                  - { label: "Link prodotto", name: "url", widget: "string" }
+                  - { label: "Prezzo nel pulsante", name: "prezzo", widget: "string", required: false }
+              - { label: "Nota personale", name: "nota", widget: "text", required: false }
