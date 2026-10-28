@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grissino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EDF0EE;
+    --surface: #F8FAF9;
+    --ink: #14262B;
+    --muted: #547962;
+    --line: #C9D3D1;
+    --accent: #D2491E;
+    --accent-ink: #FFFFFF;
+    --tint: #c3e1da;
+    --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F1A1D;
+      --surface: #162428;
+      --ink: #E6EEEC;
+      --muted: #9FB0B3;
+      --subt: #202e2c;
+      --line: #2A3D41;
+      --accent: #F07848;
+      --accent-ink: #1A0D07;
+      --tint: #22363A;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 40px 16px 56px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+
+  header { display: flex; flex-direction: column; gap: 12px; max-width: 62ch; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.02; letter-spacing: -0.02em;
+    margin: 0; text-wrap: balance;
+  }
+  .intro { margin: 0; color: var(--subt); white-space: pre-line; }
+  .intro2 { margin: 0; color: var(--muted); white-space: pre-line; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+
+  .art { background: var(--tint); border-bottom: 1px solid var(--line); }
+  .art .main { width: 100%; aspect-ratio: 4 / 3; display: block; object-fit: cover; }
+  .art .ph {
+    width: 100%; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 5rem; color: var(--muted); opacity: 0.6;
+  }
+  .thumbs { display: flex; gap: 6px; padding: 8px; flex-wrap: wrap; border-top: 1px solid var(--line); }
+  .thumbs button { padding: 0; border: 2px solid transparent; border-radius: 4px; background: none; cursor: pointer; width: 52px; height: 40px; overflow: hidden; }
+  .thumbs button[aria-current="true"] { border-color: var(--accent); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .body { padding: 18px; display: flex; flex-direction: column; gap: 14px; flex: 1; min-width: 0; }
+  .tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+  .desc { margin: 0; color: var(--muted); font-size: 15px; white-space: pre-line; }
+  .price { font-family: var(--font-mono); font-size: 15px; }
+
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 14px; }
+  dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+
+  .shops { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+  .shops a {
+    display: flex; justify-content: space-between; gap: 12px; align-items: center;
+    padding: 11px 14px; min-height: 44px; border-radius: 6px; text-decoration: none; font-weight: 600;
+    background: var(--accent); color: var(--accent-ink);
+  }
+  .shops a span { font-family: var(--font-mono); font-weight: 400; font-size: 13px; }
+  .shops a:hover { filter: brightness(1.07); }
+  .note { margin: 0; font-size: 14px; font-style: italic; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 12px; }
+
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  noscript { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow" id="occasione"></div>
+    <h1 id="titolo"></h1>
+    <div class="eyebrow" id="occasione2"></div>
+    <p class="intro" id="intro"></p>
+  </header>
+  <noscript>Per vedere la lista serve JavaScript attivo nel browser.</noscript>
+  <main class="grid" id="grid"></main>
+</div>
+
+<!-- =====================================================================
+     DA QUI IN POI MODIFICHI TU.
+     Cambia solo i testi tra virgolette. Non toccare virgole, parentesi e
+     parentesi graffe. Ogni regalo sta tra { } e finisce con una virgola.
+
+     Per AGGIUNGERE un regalo: copia un intero blocco da "{" a "}," e
+     incollalo sotto l'ultimo. Ogni campo è facoltativo: se non ti serve,
+     cancella la riga intera.
+     ===================================================================== -->
+<script>
+const WISHLIST = {
+
+  // ---- Parte alta della pagina -------------------------------------------
+  occasione: "Idee regalo per:",
+  titolo: "Crissino",
+  occasione2:"detto anche Grissino",
+  intro:
+    "Ciao! Se hai voglia di farmi un regalo, qui trovi qualche idea.\n" +
+    "Per ogni cosa ci sono i link ai negozi, le opzioni che vorrei e, quando serve, una nota.",
+
+  // ---- I regali ----------------------------------------------------------
+  regali: [
+
+    // ESEMPIO COMPLETO: copia questo blocco e cambia i testi.
+    {
+      categoria: "Stampa 3D",
+      nome: "Bambu Lab P1S",
+      descrizione: "Stampante 3D chiusa, per stampare in autonomia pezzi e prototipi.",
+      prezzo: "349€ - sito ufficiale Bambulab",
+
+      // Foto: puoi metterne una o più. Ogni foto può essere:
+      //   - un indirizzo internet che finisce in .jpg / .png (tasto destro sull'immagine > "Copia indirizzo immagine")
+      //   - il nome di un file nella stessa cartella, es. "foto/p1s.jpg" (in questo caso mandi la cartella intera)
+      // Queste foto sono prese dal sito di un negozio: se il negozio le toglie, spariscono anche qui.
+      foto: [
+        "https://3d.nice-cdn.com/upload/image/product/large/default/bambu-lab-p1s-1-pz-826602-it.png",
+        "https://3d.nice-cdn.com/upload/image/product/large/default/bambu-lab-p1s-1-pz-826608-it.png",
+        "https://3d.nice-cdn.com/upload/image/product/large/default/bambu-lab-p1s-1-pz-826614-it.png"
+      ],
+
+      // Opzioni: tutto quello che vuoi specificare (colore, taglia, versione...).
+      opzioni: [
+        { nome: "Versione", valore: "Normale - No AMS" },
+        { nome: "Optional",   valore: "Ugello rinforzato, filamenti" }
+      ],
+
+      // Dove comprarlo: un pulsante per negozio. "prezzo" qui è facoltativo.
+      negozi: [
+        { nome: "Bambu Lab Store EU", url: "https://eu.store.bambulab.com/it/collections/3d-printer/products/p1s", prezzo: "" },
+      ],
+
+      // Nota personale, facoltativa.
+      nota: "Black Friday da fine Ottobre! Sottrarre al prezzo 150€ ricavati dalla vendita di quella vecchia."
+    },
+
+    {
+      categoria: "Campeggio",
+      nome: "Tenda 3F UL Gear - Lanshan 1",
+      descrizione: "Tenda ultraleggera per una persona, versione 3 stagioni.",
+      prezzo: "€122.27 su 3F UL GEAR",
+      foto: [
+        "https://www.koksoak.com/cdn/shop/files/tente-lanshan-1-2026-kaki_2.jpg?v=1763504371&width=900",
+        "https://www.koksoak.com/cdn/shop/files/tente-lanshan-1-2026-kaki_1.jpg?v=1763504371&width=900",
+        "https://www.koksoak.com/cdn/shop/files/tente-ultra-legere-1-place-lanshan-1-2026-de-3F-UL-Gear-tente-brune_79de95fa-226d-41b5-9a04-7a95812d814f.jpg?v=1763504371&width=900"
+      ],
+      opzioni: [
+        { nome: "Colore",   valore: "Kachi (o Dark Grey)" },
+        { nome: "Versione", valore: "3 stagioni (NON 4!!!!), da 775g" },
+        { nome: "Optional",     valore: "bastone carbonio per sorreggerla (secondo link)... optional... ma molto utile perché sennó la tenda non sta su da sola!!!" }
+      ],
+      negozi: [
+        { nome: "3F UL GEAR", url: "https://3fulgear.com/product/ultralight-tent/lanshan-1/?currency=EUR#", prezzo: "€122.27" },
+        { nome: "Bastone Full-Carbon", url: "https://3fulgear.com/product/accessories/carbon-tent-pole/?currency=EUR#", prezzo: "€22.31" }
+        
+      ],
+      nota: "Su Temu potrebbe costare meno, da confrontare prima di comprare. La producono a Hong-Kong credo, quindi presa da una parte o dall'altra é uguale."
+    },
+
+    // Per aggiungere un regalo, metti una virgola dopo la "}" qui sopra
+    // e incolla sotto un nuovo blocco.
+        // ESEMPIO CON POCHI CAMPI: foto e negozi si possono lasciare fuori.
+    {
+      categoria: "Ciclismo invernale",
+      nome: "Gambali invernali da bici",
+      descrizione: "Termici e compatti, che si ripiegano e stanno in tasca quando si scalda.",
+      opzioni: [
+        { nome: "Taglia",  valore: "L" },
+        { nome: "Colore",  valore: "Nero" }
+      ],
+      nota: "Ancora da scegliere il modello: aggiungo il link appena lo trovo."
+    },
+
+    {
+      categoria: "Caricatore serio",
+      nome: "Anker 100W USB C Charger",
+      descrizione: "Mi sono stufato di avere caricatori stupidiii. Ne voglio uno serio all'occorrenza",
+      opzioni: [
+        { nome: "Tipo",  valore: "100w, almeno 2 entrate" }
+            ],
+      prezzo: "attorno ai 50€",
+      foto: [
+        "https://m.media-amazon.com/images/I/71MqkMflRBL._AC_UF1000,1000_QL80_.jpg"
+      ],
+      negozi: [
+        { nome: "Amazon", url: "https://www.amazon.de/-/en/Anker-Charger-Compact-Display-Control-silver/dp/B0FG77P8RR/ref=pd_ci_mcx_mh_mcx_views_2_image?pd_rd_w=QiRlX&content-id=amzn1.sym.bbac26bb-3f7b-44dd-a8a5-c10fcfb1ed60%3Aamzn1.symc.30e3dbb4-8dd8-4bad-b7a1-a45bcdbc49b8&pf_rd_p=bbac26bb-3f7b-44dd-a8a5-c10fcfb1ed60&pf_rd_r=CBHJR7X5MH9A3JCD6ZTQ&pd_rd_wg=3bRAG&pd_rd_r=997d9647-97e6-4c63-961e-8da688fc605c&pd_rd_i=B0FG745LNB&th=1"}
+      ],
+      nota: "Questo sembra il meglio del meglio."
+    },
+
+    {
+      categoria: "Manubrio bici gravel",
+      nome: "Lexon Gravel Bar",
+      descrizione: "Nuovo manubrio integrato gravel piú stretto",
+      prezzo: "143€ - sito ufficiale ",
+
+      // Foto: puoi metterne una o più. Ogni foto può essere:
+      //   - un indirizzo internet che finisce in .jpg / .png (tasto destro sull'immagine > "Copia indirizzo immagine")
+      //   - il nome di un file nella stessa cartella, es. "foto/p1s.jpg" (in questo caso mandi la cartella intera)
+      // Queste foto sono prese dal sito di un negozio: se il negozio le toglie, spariscono anche qui.
+      foto: [
+        "https://ae01.alicdn.com/kf/S63f85edfb8504d0697449a10ee84f38a0.jpg",
+        "https://ae01.alicdn.com/kf/Sd9d4086550d64e3da469ca93af3a4219B.jpg"
+      ],
+
+      // Opzioni: tutto quello che vuoi specificare (colore, taglia, versione...).
+      opzioni: [
+        { nome: "Versione", valore: "500-110mm (NON SONO SICURO!!!)" }
+      ],
+
+      // Dove comprarlo: un pulsante per negozio. "prezzo" qui è facoltativo.
+      negozi: [
+        { nome: "Lexon website", url: "https://lexon-bike.com/de/lexon-unox-carbon-road-bike-integrated-handlebar-28-6mm-gravel-bike-handle-bar-t1000-racing-bent-bar-bicycle-accessories/?utm_source=chatgpt.com", prezzo: "" },
+        { nome: "Aliexpress (per comprare 1)", url: "https://de.aliexpress.com/item/1005003923284462.html?spm=a2g0o.detail.pcDetailTopMoreOtherSeller.2.4925P3tJP3tJvX&gps-id=pcDetailTopMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=1068cd9c-9ccd-4dc1-ae0f-e5e5897769bd&_t=gps-id%3ApcDetailTopMoreOtherSeller%2Cscm-url%3A1007.40050.354490.0%2Cpvid%3A1068cd9c-9ccd-4dc1-ae0f-e5e5897769bd%2Ctpp_buckets%3A668%232846%238116%232002&pdp_ext_f=%7B%22order%22%3A%22375%22%2C%22eval%22%3A%221%22%2C%22sceneId%22%3A%2230050%22%2C%22fromPage%22%3A%22recommend%22%7D&pdp_npi=6%40dis%21EUR%21225.51%21171.39%21%21%21245.01%21186.21%21%402103962917932033570908311e0d56%2112000027477687671%21rec%21DE%21%21XZ%211%210%21n_tag%3A-29919%3Bd%3A1877f459%3Bm03_new_user%3A-29895&utparam-url=scene%3ApcDetailTopMoreOtherSeller%7Cquery_from%3A%7Cx_object_id%3A1005003923284462%7C_p_origin_prod%3A", prezzo: "" },
+        { nome: "Aliexpress (per comprare 2)", url: "https://de.aliexpress.com/item/1005010796342163.html?spm=a2g0o.productlist.main.1.2f4d793bvmJEah&algo_pvid=0ae66b6d-203d-4c03-9d1e-8469b94b2981&algo_exp_id=0ae66b6d-203d-4c03-9d1e-8469b94b2981-0&pdp_ext_f=%7B%22order%22%3A%222%22%2C%22eval%22%3A%221%22%2C%22fromPage%22%3A%22search%22%7D&pdp_npi=6%40dis%21EUR%21227.78%21213.69%21%21%211649.40%211547.35%21%400b15841617932032846314803e0f87%2112000053532788786%21sea%21DE%210%21X%211%210%21n_tag%3A-29919%3Bd%3A1877f459%3Bm03_new_user%3A-29895&curPageLogUid=IUMzZj9lvTBS&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005010796342163%7C_p_origin_prod%3A", prezzo: "" }
+      ],
+
+      // Nota personale, facoltativa.
+      nota: "DEVO ANCORA CAPIRE BENE QUALE VOGLIO!!!."
+    },
+
+
+
+
+    
+  ]
+};
+</script>
+
+<!-- =====================================================================
+     DA QUI IN POI NON SERVE TOCCARE NIENTE.
+     ===================================================================== -->
+<script>
+(function () {
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null && text !== "") n.textContent = text;
+    return n;
+  }
+  function safeUrl(u) {
+    return /^https?:\/\//i.test(String(u || "").trim()) ? String(u).trim() : null;
+  }
+  function list(v) { return Array.isArray(v) ? v : (v ? [v] : []); }
+
+  var W = WISHLIST || {};
+
+document.title = W.titolo || "Wish list";
+
+var occ = document.getElementById("occasione");
+W.occasione ? (occ.textContent = W.occasione) : occ.remove();
+
+var occ2 = document.getElementById("occasione2");
+W.occasione2 ? (occ2.textContent = W.occasione2) : occ2.remove();
+
+document.getElementById("titolo").textContent = W.titolo || "Wish list";
+
+var intro = document.getElementById("intro");
+W.intro ? (intro.textContent = W.intro) : intro.remove();
+
+  var grid = document.getElementById("grid");
+
+  list(W.regali).forEach(function (r) {
+    var card = el("article", "card");
+
+    var art = el("div", "art");
+    var foto = list(r.foto).filter(Boolean);
+    if (foto.length) {
+      var main = el("img", "main");
+      main.src = foto[0];
+      main.alt = r.nome || "";
+      main.loading = "lazy";
+      art.appendChild(main);
+      if (foto.length > 1) {
+        var strip = el("div", "thumbs");
+        foto.forEach(function (src, i) {
+          var b = el("button");
+          b.type = "button";
+          b.setAttribute("aria-label", "Foto " + (i + 1));
+          b.setAttribute("aria-current", i === 0 ? "true" : "false");
+          var t = el("img"); t.src = src; t.alt = "";
+          b.appendChild(t);
+          b.addEventListener("click", function () {
+            main.src = src;
+            strip.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-current", "false"); });
+            b.setAttribute("aria-current", "true");
+          });
+          strip.appendChild(b);
+        });
+        art.appendChild(strip);
+      }
+    } else {
+      art.appendChild(el("div", "ph", (r.nome || "?").trim().charAt(0).toUpperCase()));
+    }
+    card.appendChild(art);
+
+    var body = el("div", "body");
+    if (r.categoria) body.appendChild(el("div", "tag", r.categoria));
+    body.appendChild(el("h2", null, r.nome || "Senza nome"));
+    if (r.descrizione) body.appendChild(el("p", "desc", r.descrizione));
+    if (r.prezzo) body.appendChild(el("div", "price", r.prezzo));
+
+    var opz = list(r.opzioni);
+    if (opz.length) {
+      var dl = el("dl");
+      opz.forEach(function (o) {
+        dl.appendChild(el("dt", null, o.nome));
+        dl.appendChild(el("dd", null, o.valore));
+      });
+      body.appendChild(dl);
+    }
+
+    var negozi = list(r.negozi).filter(function (n) { return safeUrl(n.url); });
+    if (negozi.length) {
+      var shops = el("div", "shops");
+      negozi.forEach(function (n) {
+        var a = el("a");
+        a.href = safeUrl(n.url);
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.appendChild(el("strong", null, n.nome || "Vai al negozio"));
+        if (n.prezzo) a.appendChild(el("span", null, n.prezzo));
+        shops.appendChild(a);
+      });
+      body.appendChild(shops);
+    }
+
+    if (r.nota) body.appendChild(el("p", "note", r.nota));
+
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+})();
+</script>
+</body>
+</html>
